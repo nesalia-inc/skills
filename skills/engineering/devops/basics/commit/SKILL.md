@@ -48,23 +48,82 @@ If your change doesn't fit, omit the scope.
 - Lowercase first letter, no period at end
 - Under 72 characters
 
-## Branch Strategy
+### All Commits MUST Have a Body/Description
+
+**Every commit requires a body text after the subject line.** The subject alone is not sufficient.
+
+- Provide context: WHY was this change made?
+- Explain WHAT changed and why it was necessary
+- Mention any relevant links (issues, PRs, RFCs)
+- Describe the impact or benefit
+
+**Minimum acceptable body:**
+```
+feat(auth): add refresh token rotation
+
+Adds automatic token refresh before expiration.
+```
+
+**Good commit with detailed description:**
+```
+feat(auth): add refresh token rotation
+
+- Implements silent refresh 5 minutes before expiry
+- Uses refresh token from secure HttpOnly cookie
+- Updates access token without page reload
+- Handles refresh failures gracefully with re-auth
+
+Closes #45
+```
+
+## Branch Hierarchy
+
+```
+main <- canary <- feature branches
+```
+
+| Branch | Purpose | Protection |
+|--------|---------|------------|
+| `main` | Production-ready, always deployable | **BLOCKED: No direct push. Must use PR from canary.** |
+| `canary` | Integration testing before main | **BLOCKED: No direct push. Must use PR from feature branches.** |
+| `feature/*` | Development work | No restrictions |
+
+### Important: Direct Push is Blocked
+
+- **main**: Push directly is blocked by branch protection. You MUST create a PR from canary.
+- **canary**: Push directly is blocked by branch protection. You MUST create a PR from feature branches.
+- **feature/***: Normal push allowed for development.
 
 ### When to Create a Branch
 
-| Change Type | Branch Required? |
-|-------------|-------------------|
-| Hotfix (1-liner, trivial) | No — commit directly on main |
-| Bug fix (non-trivial) | Yes |
-| Small/Large feature | Yes |
-| Refactor (major) | Yes |
-| Docs only | Yes |
+| Change Type | Branch Required? | Merge Destination |
+|-------------|-------------------|-------------------|
+| Hotfix (1-liner, trivial) | No — commit directly on main | main |
+| Bug fix (non-trivial) | Yes | canary |
+| Small/Large feature | Yes | canary |
+| Refactor (major) | Yes | canary |
+| Docs only | Yes | canary |
 
 ### Branch Naming
 
 ```
 <type>/<short-description>
 ```
+
+### Canary Workflow
+
+All non-trivial changes follow this path:
+
+```
+feature/xyz → canary → main
+```
+
+1. Create feature branch from `canary`
+2. Make commits with descriptions
+3. Push and create PR to `canary`
+4. After CI passes and review, merge to `canary`
+5. Verify on `canary` (staging/testing)
+6. When `canary` is stable, merge `canary` → `main`
 
 ## Non-Interactive Commit Workflow
 

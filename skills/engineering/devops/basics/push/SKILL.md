@@ -23,8 +23,8 @@ git status
 # 2. Check if branch exists on remote
 git branch -vv
 
-# 3. Review commits to be pushed
-git log --oneline origin/main..HEAD
+# 3. Review commits to be pushed (against canary, not main)
+git log --oneline origin/canary..HEAD
 ```
 
 ## Push Commands
@@ -88,22 +88,73 @@ git remote add origin https://github.com/owner/repo.git
 git remote set-url origin https://github.com/owner/repo.git
 ```
 
+## Branch Hierarchy
+
+```
+main <- canary <- feature branches
+```
+
+| Branch | Purpose | Push |
+|--------|---------|------|
+| `main` | Production-ready, always deployable | **BLOCKED: No direct push. Must use PR from canary.** |
+| `canary` | Integration testing before main | **BLOCKED: No direct push. Must use PR from feature branches.** |
+| `feature/*` | Development work | Normal push allowed |
+
+### Important: Direct Push is Blocked
+
+- **main**: Push directly is blocked. You MUST create a PR.
+- **canary**: Push directly is blocked. You MUST create a PR.
+- **feature/***: Normal push allowed.
+
+Always use PRs for main and canary branches.
+
 ## Creating Pull Requests (Non-Interactive)
 
-After pushing, create PR using `gh`:
+After pushing, create PR to `canary` using `gh`:
 
 ```bash
-# Create PR with title and body
+# Create PR to canary (normal flow)
 gh pr create --title "feat(scope): description" --body "Description
 
-Co-Authored-By: martyy-code <nesalia.inc@gmail.com>"
+Co-Authored-By: martyy-code <nesalia.inc@gmail.com>" --base canary
 
 # Create PR from specific branch
-gh pr create --base main --head feat/my-feature
+gh pr create --base canary --head feat/my-feature
 
 # Create PR with reviewer
-gh pr create --reviewer username1,username2
+gh pr create --base canary --reviewer username1,username2
 ```
+
+### Direct to Main (Hotfix Only)
+
+```bash
+# Only for trivial hotfixes
+gh pr create --title "fix(scope): quick fix" --body "..." --base main
+```
+
+## Canary to Main Workflow
+
+After verifying on `canary`:
+
+```bash
+# 1. Switch to main and pull latest
+git checkout main && git pull
+
+# 2. Merge canary to main
+git merge origin/canary
+
+# 3. Push main
+git push
+
+# 4. Switch back to canary to continue work
+git checkout canary
+```
+
+### When NOT to Merge to Main
+
+- CI is failing on `canary`
+- Major issues discovered during canary testing
+- Waiting for approval or sign-off
 
 ### PR Body Template
 
@@ -171,11 +222,12 @@ gh pr status
 ## Quick Reference
 
 ```
-Push new branch:     git push -u origin HEAD
-Push update:         git push
-Force with lease:    git push --force-with-lease
-Create PR:           gh pr create --title "feat: description" --body "..."
-Check status:        git status && git branch -vv
+Push new branch:         git push -u origin HEAD
+Push update:             git push
+Force with lease:        git push --force-with-lease
+Create PR to canary:     gh pr create --base canary --title "feat: ..."
+Merge canary to main:    git checkout main && git merge origin/canary && git push
+Check status:            git status && git branch -vv
 ```
 
 ## Related Skills
@@ -183,4 +235,5 @@ Check status:        git status && git branch -vv
 | Skill | When to Use |
 |-------|-------------|
 | `/commit` | Before push, to make proper commits |
-| `/sync` | To sync branch with latest main |
+| `/sync` | To sync branch with latest canary |
+| `/setup-canary` | More about the canary workflow |
