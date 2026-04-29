@@ -1,4 +1,4 @@
-# Development Skills
+# Skills
 
 Internal skills used by the development teams at **Nesalia Inc.** and **DeesseJS**.
 
