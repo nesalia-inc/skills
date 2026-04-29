@@ -1,10 +1,10 @@
-# Marty Skills
+# Skills
 
 Internal skills used by the development teams at **Nesalia Inc.** and **DeesseJS**.
 
 ## Overview
 
-These skills define the workflows, conventions, and best practices for Marty's agent teams. They are used by Claude Code agents to perform various development tasks following consistent patterns across all projects.
+These skills define the workflows, conventions, and best practices for agent teams. They are used by Claude Code agents to perform various development tasks following consistent patterns across all projects.
 
 ## Skills Structure
 
