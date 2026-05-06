@@ -234,7 +234,7 @@ The `project-init` skill must create a `CLAUDE.md` that explains:
 - `[[project/definition/architecture/overview.md]]`
 - `[[project/definition/architecture/data-flow.md]]`
 - `[[project/definition/structure.md]]`
-- `[[project/definition/conventions.md]]`
+- `[[project/rules/conventions/]]`
 - `[[project/definition/stack.md]]`
 - `[[map.md]]`
 
@@ -287,6 +287,20 @@ The `project-init` skill must create a `CLAUDE.md` that explains:
 | `create-adr` | Create decision records | Utility | On major decisions |
 | `review-adr` | Read and explain ADRs | Utility | Before tech changes |
 | `context-claude-integration` | Link to Claude Code systems | Setup | During initial setup |
+
+## Project Rules Skills
+
+Project Rules is integrated into the Project Context System. See [[../project-rules/README.md]] for the full system.
+
+| Skill | Role | Type | Trigger |
+|-------|------|------|---------|
+| `/check-rules` | Get rules applicable to current task | Utility | Before starting task |
+| `/add-convention` | Document a new convention | On-demand | Add new convention |
+| `/add-constraint` | Document a constraint | On-demand | Add limitation |
+| `/add-pattern` | Document a pattern | On-demand | Add pattern |
+| `/add-methodology` | Document a methodology | On-demand | Add process |
+| `/list-rules` | List all project rules | Utility | Onboarding, overview |
+| `/review-rules` | Identify gaps/contradictions | Utility | Periodic review |
 
 ---
 

@@ -142,7 +142,7 @@ These triggers tell you when to READ or WRITE to context files.
 | When... | Read | Why |
 |---------|------|-----|
 | Conversation starts | `.context/map.md` | Get overview + navigation |
-| Before writing code | `[[project/definition/conventions.md]]` | Apply project rules |
+| Before writing code | `[[project/rules/conventions/]]` | Apply project rules |
 | Before installing deps | `[[project/definition/stack.md]]` | Know target stack |
 | Before tech changes | `[[project/definition/decisions/*.md]]` | Understand past decisions |
 | When navigating | `[[project/definition/structure.md]]` | Respect folder logic |
@@ -173,8 +173,8 @@ These triggers tell you when to READ or WRITE to context files.
 Always use `[[path/to/file.md]]` format for links within `.context/`:
 
 ```
-Good:  See [[project/definition/conventions.md]]
-Bad:   See ../project/definition/conventions.md
+Good:  See [[project/rules/conventions/]]
+Bad:   See ../project/rules/conventions/
 ```
 
 ## Rules the Agent Must Follow

@@ -76,7 +76,7 @@ This project uses the Project Context System (`.context/`). All agent context li
 | [[project/definition/architecture/overview.md]] | Components | When understanding system design |
 | [[project/definition/architecture/data-flow.md]] | Data flow | When debugging/modifying data flow |
 | [[project/definition/structure.md]] | Folder organization | When navigating or adding files |
-| [[project/definition/conventions.md]] | Coding rules + agent instructions | Before writing code |
+| [[project/rules/conventions/]] | Coding rules + agent instructions | Before writing code |
 | [[project/definition/stack.md]] | Technologies | Before installing/updating deps |
 | [[project/definition/decisions/]] | Architecture decisions | Before refactoring or proposing tech changes |
 | [[project/status/current.md]] | Current sprint/phase | At start of each session |
@@ -87,7 +87,7 @@ This project uses the Project Context System (`.context/`). All agent context li
 ## Operational Protocol
 
 1. **On Start**: Read this file + `status/current.md` + `status/progress.md`. Perform Context Handshake.
-2. **On Code**: Read `definition/conventions.md` before writing.
+2. **On Code**: Read `rules/conventions/` before writing.
 3. **On Tech Change**: Check `definition/decisions/` before proposing.
 4. **On Task Completion**: Update `status/recent.md`.
 5. **On Commit/PR**: Update `status/progress.md` if work in progress.
@@ -226,29 +226,37 @@ created: $DATE
 [Where does the application start?]
 ```
 
-### `.context/project/definition/conventions.md` (template)
+### `.context/project/rules/conventions/` (template - directory with files)
 
 ```markdown
 ---
 created: $DATE
+type: convention
+domain: [api|code|git|docs|naming|architecture]
 ---
 
-# Coding Conventions
+# Convention: [Short Title]
 
-## Naming
-[Naming conventions for files, variables, functions, etc.]
+## Rule
+[One sentence: the actual rule]
 
-## Code Style
-[Indentation, line length, formatting rules]
+## Details
+[Extended explanation of why this rule exists]
 
-## Testing Approach
-[How tests are organized and written]
+## Examples
 
-## Git Workflow
-[Commit conventions, branch strategy]
+### ✅ Correct
+```[language]
+[correct code or practice]
+```
 
-## Agent Instructions
-[Specific instructions for how the agent should behave on this project]
+### ❌ Incorrect
+```[language]
+[incorrect code or practice]
+```
+
+## Enforcement
+[How this rule is enforced - linting, code review, etc.]
 ```
 
 ### `.context/project/definition/stack.md` (template)
@@ -371,9 +379,13 @@ This project uses the **Project Context System** (`.context/`). This system prov
     │   ├── identity.md
     │   ├── architecture/
     │   ├── structure.md
-    │   ├── conventions.md
     │   ├── stack.md
     │   └── decisions/    # Architecture Decision Records
+    ├── rules/           # How to work in this project
+    │   ├── conventions/  # Naming, code style, git workflow
+    │   ├── patterns/    # Common solutions
+    │   ├── methodologies/ # Team processes
+    │   └── constraints/  # Hard limitations
     └── status/           # Ephemeral: current state
         ├── current.md
         ├── active-issues.md
@@ -386,7 +398,7 @@ This project uses the **Project Context System** (`.context/`). This system prov
 | When... | Read | Write |
 |---------|------|-------|
 | Conversation starts | `.context/map.md` + `status/*` | — |
-| Before writing code | `definition/conventions.md` | — |
+| Before writing code | `rules/conventions/` | — |
 | Before tech changes | `definition/decisions/*.md` | — |
 | Task completes | — | `status/recent.md` |
 | Before commit/PR | — | `status/progress.md` |

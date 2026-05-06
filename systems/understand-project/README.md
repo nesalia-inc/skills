@@ -34,10 +34,16 @@ This system creates a clear separation between documentation meant for humans an
     │   │   ├── overview.md
     │   │   └── data-flow.md
     │   ├── structure.md
-    │   ├── conventions.md
     │   ├── stack.md
     │   └── decisions/
     │       └── 0001-*.md       # Architecture Decision Records
+    │
+    ├── rules/                 # How to work in this project
+    │   ├── README.md           # Entry point for rules
+    │   ├── conventions/       # Naming, formatting, git, etc.
+    │   ├── patterns/          # Common solutions
+    │   ├── methodologies/     # Team processes
+    │   └── constraints/       # Hard limitations
     │
     └── status/               # EPHEMERAL - changes frequently
         ├── current.md
@@ -45,6 +51,18 @@ This system creates a clear separation between documentation meant for humans an
         ├── recent.md
         └── progress.md        # Current work session tracking
 ```
+
+## Project Rules
+
+After understanding the project (definition), the agent must also understand **how to work in this project** via the Project Rules system.
+
+Project rules are stored in `.context/project/rules/` and include:
+- **Conventions** — How we do things (naming, code style, git workflow)
+- **Patterns** — Recurring solutions to problems
+- **Methodologies** — Team processes and workflows
+- **Constraints** — Hard limitations (tech, business, architecture)
+
+See `../project-rules/README.md` for full system documentation.
 
 ## Entry Point: map.md
 
@@ -79,9 +97,12 @@ E-commerce platform for Nesalia Inc. Built with Node.js/React. Target: 10k daily
 | [[project/definition/architecture/overview.md]] | Component overview | When understanding system design |
 | [[project/definition/architecture/data-flow.md]] | Data flow | When debugging or modifying data flow |
 | [[project/definition/structure.md]] | Folder organization | When navigating or adding new files |
-| [[project/definition/conventions.md]] | Coding rules + agent instructions | Before writing any code |
 | [[project/definition/stack.md]] | Technologies | Before installing/updating deps |
 | [[project/definition/decisions/]] | Architecture decisions | Before refactoring or proposing tech changes |
+| [[project/rules/README.md]] | Rules entry point | Always, after definitions |
+| [[project/rules/conventions/]] | Project conventions | Before writing code |
+| [[project/rules/patterns/]] | Common patterns | When solving recurring problems |
+| [[project/rules/constraints/]] | Hard constraints | Before architectural decisions |
 | [[project/status/current.md]] | Current sprint and phase | At start of each session |
 | [[project/status/active-issues.md]] | Current blockers | When encountering blockers |
 | [[project/status/recent.md]] | Latest changes | After git operations |
@@ -123,9 +144,10 @@ Static data that rarely changes. Once written, it provides long-term context.
 | `architecture/overview.md` | Components overview | "What are the main components?" |
 | `architecture/data-flow.md` | Data flow | "How does data move through the system?" |
 | `structure.md` | Folder organization | "Why is the project organized this way?" |
-| `conventions.md` | Coding standards | "How do we code here?" + agent instructions |
 | `stack.md` | Technologies | "What is this built with?" |
 | `decisions/*.md` | Architecture decisions | "Why was this choice made?" |
+
+> **Note:** Conventions are now in `.context/project/rules/conventions/` (see Project Rules below).
 
 > **Important:** Definition documents describe the **target state** — the vision, the goal, what the project *should* become. They do NOT describe the current reality, which may be messy or incomplete. This allows the agent to understand the project's intention and identify gaps between current state and desired state.
 
@@ -197,6 +219,26 @@ This enables:
 | **Blockers** | Issues blocking progress |
 | **Recent Activity** | Latest merges, deployments, significant changes |
 | **Session Progress** | What is being worked on right now, completed steps |
+
+## Project Rules
+
+After understanding the project definition, the agent must understand **how to work in this project** via the Project Rules system.
+
+**Location**: `.context/project/rules/`
+
+| Category | Purpose | When to Load |
+|----------|---------|--------------|
+| `rules/README.md` | Entry point for rules | Always after definition |
+| `rules/conventions/` | How we do things | Before writing code |
+| `rules/patterns/` | Recurring solutions | When solving problems |
+| `rules/methodologies/` | Team processes | When doing team work |
+| `rules/constraints/` | Hard limitations | Before architectural decisions |
+
+**Key distinction from Definition:**
+- **Definition** — What the project IS (target state)
+- **Rules** — How to WORK in this project (conventions, patterns, constraints)
+
+See `../project-rules/README.md` for full system documentation.
 
 ## Document Format
 
@@ -304,7 +346,7 @@ You are operating in a project equipped with a Project Context System (.context/
 2. Based on the user's request, identify which files in `.context/` are relevant using the Load Triggers in map.md.
 3. Check the `updated` date in the frontmatter. If a status file is older than 14 days, warn the user and offer to sync it with current project state.
 4. Before proposing architectural changes, you MUST read the relevant ADRs in `project/definition/decisions/`.
-5. You must strictly follow the personality and coding rules defined in `project/definition/conventions.md`.
+5. You must follow the conventions defined in `project/rules/conventions/` and respect constraints in `project/rules/constraints/`.
 
 ## Context-First Workflow
 
@@ -325,6 +367,21 @@ This system uses the following skills:
 |-------|---------|
 | `project-context` | Main skill for loading and providing project context to the agent |
 | `project-init` | Scaffold a new `.context/` structure |
+
+### Project Rules Skills
+
+The Project Rules system provides additional skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `/check-rules` | Get rules applicable to current task |
+| `/add-convention` | Document a new convention |
+| `/add-constraint` | Document a constraint |
+| `/add-pattern` | Document a pattern |
+| `/list-rules` | List all project rules |
+| `/review-rules` | Review rules for gaps/contradictions |
+
+See `../project-rules/README.md` for details.
 
 ## Future Enhancements
 

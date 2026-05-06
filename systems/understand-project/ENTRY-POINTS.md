@@ -19,7 +19,7 @@ When the agent encounters these triggers, it must read the specified context fil
 | Trigger | File to Read | Reason |
 |---------|-------------|--------|
 | **Conversation starts** | `.context/map.md` | Get project overview and navigation |
-| **Before writing code** | `[[project/definition/conventions.md]]` | Apply project coding rules |
+| **Before writing code** | `[[project/rules/conventions/]]` | Apply project coding rules |
 | **Before installing/updating deps** | `[[project/definition/stack.md]]` | Understand target stack |
 | **Before proposing tech/stack changes** | `[[project/definition/decisions/*.md]]` | Understand why current choices were made |
 | **When navigating or adding files** | `[[project/definition/structure.md]]` | Respect folder organization |
@@ -74,7 +74,7 @@ Before coding, the agent must:
 
 ### Rule 1: Never Guess, Always Read
 
-> "Before writing any code, read [[conventions.md]]. Before navigating, read [[structure.md]]. Never assume you know the project conventions."
+> "Before writing any code, read [[project/rules/conventions/]]. Before navigating, read [[project/definition/structure.md]]. Never assume you know the project conventions."
 
 ### Rule 2: Document Decisions When Made
 
@@ -144,7 +144,7 @@ created: 2024-01-15
 [Trade-offs, benefits, and risks of this choice]
 ```
 
-Place this template in `[[project/definition/conventions.md]]` for easy reference.
+Place this template in `[[project/rules/conventions/]]` for easy reference.
 
 ## Operational Protocol (map.md integration)
 
@@ -155,7 +155,7 @@ Add this section to `map.md` so the agent knows how to manage itself:
 
 1. **On Start**: Read this file + `status/current.md` + `status/progress.md`. Perform Context Handshake.
 
-2. **On Code**: Read `definition/conventions.md` before writing.
+2. **On Code**: Read `rules/conventions/` before writing.
 
 3. **On Tech Change**: Check `definition/decisions/` before proposing any changes.
 

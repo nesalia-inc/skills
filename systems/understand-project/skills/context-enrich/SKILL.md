@@ -96,7 +96,7 @@ Populate in this order (logical flow from high-level to specific):
 6. **[[project/definition/structure.md]]** — Project structure
    - Root organization, key directories, naming conventions, entry points
 
-7. **[[project/definition/conventions.md]]** — Coding standards
+7. **[[project/rules/conventions/]]** — Coding standards
    - Naming, code style, testing approach, git workflow, agent instructions
 
 8. **[[project/definition/stack.md]]** — Technology stack
@@ -169,7 +169,7 @@ Questions to ask:
 4. "Where is the main entry point of the application?"
 ```
 
-### For Conventions (project/definition/conventions.md)
+### For Conventions (project/rules/conventions/)
 
 ```markdown
 Questions to ask:

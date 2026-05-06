@@ -49,7 +49,7 @@ Not every decision needs an ADR. Create one when:
            │
            ▼
 ┌─────────────────────┐
-│  Create ADR File     │ → Use template from [[conventions.md]]
+│  Create ADR File     │ → Use template from [[project/rules/conventions/]]
 └──────────┬──────────┘
            │
            ▼
@@ -99,7 +99,7 @@ The ID in the title should match the filename number.
 
 ## ADR Template
 
-Located in `[[project/definition/conventions.md]]`:
+Located in `[[project/rules/conventions/]]` (or use skill `/add-convention`):
 
 ```markdown
 ---

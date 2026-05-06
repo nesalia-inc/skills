@@ -91,7 +91,7 @@ agents with instant project understanding by defining context once and reusing i
 | When... | Read | Write |
 |---------|------|-------|
 | Session starts | `.context/map.md` + `status/*` | — |
-| Before writing code | `definition/conventions.md` | — |
+| Before writing code | `rules/conventions/` | — |
 | Before tech changes | `definition/decisions/*.md` | — |
 | Task completes | — | `status/recent.md` |
 | Before commit/PR | — | `status/progress.md` |
@@ -101,7 +101,7 @@ agents with instant project understanding by defining context once and reusing i
 
 1. **Read `.context/map.md`** — Always start here to understand the project
 2. **Check staleness** — Alert if status files are old (>14 days)
-3. **Follow conventions** — Apply `definition/conventions.md` rules
+3. **Follow conventions** — Apply `rules/conventions/` rules
 4. **Check ADRs** — Before proposing tech changes, read related decisions
 5. **Update status** — On task completion, offer to update `status/recent.md`
 
@@ -127,7 +127,7 @@ Path-scoped rules load only when certain files are accessed. Create rules that r
 This project uses the Project Context System (`.context/`).
 
 - Read `.context/map.md` at session start
-- Use [[context/project/definition/conventions.md]] before writing code
+- Use [[context/project/rules/conventions/]] before writing code
 - Check [[context/project/definition/decisions/]] before tech changes
 
 **Entry Points:**
@@ -161,7 +161,7 @@ If no ADR exists, suggest creating one.
 # Coding Conventions
 
 Follow the project's coding conventions defined in:
-[[.context/project/definition/conventions.md]]
+[[.context/project/rules/conventions/]]
 
 Key points:
 - Naming conventions
