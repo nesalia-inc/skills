@@ -1,5 +1,5 @@
 ---
-name: analyze-project
+name: understand-project
 description: Manually invoke at the start of a conversation to give the agent full project context. Use this skill when you need the agent to understand the project before starting work. Also use when the user says "analyze the project", "understand this repo", "what's this project about", or "explore the codebase" at the beginning of a session.
 disable-model-invocation: true
 context: fork
