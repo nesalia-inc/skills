@@ -37,7 +37,7 @@ Grep pattern="[pattern name]" path=".context/project/rules/patterns"
 
 ### Step 3: Create Pattern File
 
-Use `../../templates/pattern-template.md` format:
+Use this template: `./TEMPLATE.md`
 
 ```markdown
 ---

@@ -31,7 +31,7 @@ Grep pattern="[keyword]" path=".context/project/rules/constraints"
 
 ### Step 3: Create Constraint File
 
-Use `../../templates/constraint-template.md` format:
+Use this template: `./TEMPLATE.md`
 
 ```markdown
 ---

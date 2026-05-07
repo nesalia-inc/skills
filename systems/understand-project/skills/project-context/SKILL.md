@@ -69,9 +69,13 @@ User starts conversation
     │   │   ├── overview.md
     │   │   └── data-flow.md
     │   ├── structure.md
-    │   ├── conventions.md
     │   ├── stack.md
     │   └── decisions/    # ADRs - document why choices were made
+    ├── rules/           # HOW TO WORK - conventions, patterns, constraints
+    │   ├── conventions/  # Naming, code style, git workflow
+    │   ├── patterns/    # Common solutions
+    │   ├── constraints/  # Hard limitations
+    │   └── methodologies/ # Team processes
     └── status/           # EPHEMERAL - changes frequently
         ├── current.md
         ├── active-issues.md
@@ -97,25 +101,37 @@ Check `updated` frontmatter on status files:
 If stale, offer to sync:
 > "I notice `[[status/current.md]]` is 20 days old. Should I analyze recent commits to update it?"
 
-### Step 3: Lazy Load Based on Task
+### Step 3: Lazy Load Based on Task (with Full Context Mode)
 
 Use the Load Triggers from `map.md`. Examples:
 
 | Task | Files to Load |
 |------|--------------|
-| Understand project | `map.md` + `identity.md` |
-| Write code | `conventions.md` + `structure.md` |
-| Install deps | `stack.md` |
-| Propose tech change | Relevant ADR(s) in `decisions/` |
-| Debug | `architecture/data-flow.md` + relevant ADR |
+| Understand project (broad questions) | ALL definition files (Full Context Mode) |
+| Write code | `rules/conventions/` + `definition/structure.md` |
+| Install deps | `definition/stack.md` |
+| Propose tech change | Relevant ADR(s) in `definition/decisions/` |
+| Debug | `definition/architecture/data-flow.md` + relevant ADR |
 | Start session | `map.md` + `status/current.md` + `status/progress.md` |
+
+#### Full Context Mode
+
+When the user asks broad questions ("summarize", "what's the architecture", "tell me about the project"), proactively load ALL definition files for comprehensive understanding, not just the minimum set.
+
+```
+Good: "Summarize the project" → Load ALL definition files
+Good: "What's the tech stack?" → Load stack.md + conventions.md
+Bad:  "Summarize the project" → Load only map.md + identity.md
+```
 
 ### Step 4: Context Handshake
 
-After loading context, signal to the user:
+After loading context, signal to the user with a clear breakdown of what was loaded:
 
 ```
 Context Loaded: [Project Name] ([Sprint/Phase]).
+- Loaded: map.md, identity.md, current.md, progress.md
+- Not loaded (lazy): structure.md, conventions.md, stack.md (available on demand)
 - [X] active ADRs
 - [Y] blockers in [[project/status/active-issues.md]]
 - Status: [up-to-date/stale]
@@ -125,13 +141,21 @@ Ready to proceed.
 
 Example:
 ```
-Context Loaded: Nesalia E-commerce (Sprint 4).
-- 3 active ADRs
-- 1 blocker in [[project/status/active-issues.md]]
+Context Loaded: @deessejs/server (RFC/DEP development phase).
+- Loaded: map.md, identity.md, current.md, progress.md
+- Not loaded (lazy): architecture/*.md, structure.md, conventions.md, stack.md (available on demand)
+- 0 active ADRs
+- 0 blockers in [[project/status/active-issues.md]]
 - Status: up-to-date
 
 Ready to proceed.
 ```
+
+#### Distinguish "Not Found" vs "Not Loaded"
+
+When the user references a file that hasn't been loaded yet:
+- **File exists but not loaded**: `"structure.md exists but was not loaded yet (available on demand)"`
+- **File doesn't exist**: `"structure.md not found in .context/ - this file may not exist yet"`
 
 ## Entry Points
 
@@ -207,6 +231,10 @@ Bad:   See ../project/rules/conventions/
 
 > On task completion and before commit/PR, OFFER to update context files. Don't update automatically — let the user confirm.
 
+### Rule 8: Distinguish "Not Found" vs "Not Loaded"
+
+> Never say "No files found" for a file that exists but wasn't loaded. Say: "X.md exists but was not loaded yet (lazy loading — will load when needed)". Only say "not found" when the file genuinely doesn't exist in .context/.
+
 ## Important Notes
 
 - **Target state, not current state** — Definition files describe the desired future, not the current messy reality. This helps identify gaps.
@@ -216,8 +244,26 @@ Bad:   See ../project/rules/conventions/
 
 ## Skills Integration
 
+### Core PCS Skills
+
 The `project-context` skill works with:
 - `/context-check` — Validate context alignment (run on session start or demand)
 - `/context-update` — Update status files (called on task completion)
 - `/create-adr` — Document major decisions
 - `/review-adr` — Read ADRs before proposing changes
+
+### Project Rules Skills
+
+After loading project context, the agent should also be aware of Project Rules skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `/check-rules` | Get rules applicable to current task |
+| `/add-convention` | Document a new convention |
+| `/add-constraint` | Document a constraint |
+| `/add-pattern` | Document a pattern |
+| `/add-methodology` | Document a methodology |
+| `/list-rules` | List all project rules |
+| `/review-rules` | Review rules for gaps/contradictions |
+
+See `[[../../project-rules/README.md]]` for full Project Rules documentation.

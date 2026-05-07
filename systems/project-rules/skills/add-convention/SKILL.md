@@ -35,7 +35,7 @@ Grep pattern="[keyword]" path=".context/project/rules/conventions"
 
 ### Step 3: Create Convention File
 
-Use `../../templates/convention-template.md` format:
+Use this template: `./TEMPLATE.md`
 
 ```markdown
 ---

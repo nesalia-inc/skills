@@ -36,7 +36,7 @@ Grep pattern="[methodology name]" path=".context/project/rules/methodologies"
 
 ### Step 3: Create Methodology File
 
-Use `../../templates/methodology-template.md` format:
+Use this template: `./TEMPLATE.md`
 
 ```markdown
 ---

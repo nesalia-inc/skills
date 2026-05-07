@@ -9,7 +9,7 @@ This document lists the skills for the Project Rules system.
 Add a new convention to `.context/project/rules/conventions/`.
 
 **Triggers:** "add a rule about X", "document this practice", "we follow this convention"
-**Template:** `../../templates/convention-template.md`
+**Template:** `skills/add-convention/TEMPLATE.md`
 
 ---
 
@@ -18,7 +18,7 @@ Add a new convention to `.context/project/rules/conventions/`.
 Document a constraint (tech, business, or architecture limitation).
 
 **Triggers:** "we must", "we can't", "due to X we have to Y"
-**Template:** `../../templates/constraint-template.md`
+**Template:** `skills/add-constraint/TEMPLATE.md`
 
 ---
 
@@ -27,7 +27,7 @@ Document a constraint (tech, business, or architecture limitation).
 Document a recurring solution to a problem.
 
 **Triggers:** "how we solve X in this project", "we always use this approach for Y"
-**Template:** `../../templates/pattern-template.md`
+**Template:** `skills/add-pattern/TEMPLATE.md`
 
 ---
 
@@ -36,7 +36,7 @@ Document a recurring solution to a problem.
 Document how work is done in the project.
 
 **Triggers:** "how we do X in this team", "describe the process"
-**Template:** `../../templates/methodology-template.md`
+**Template:** `skills/add-methodology/TEMPLATE.md`
 
 ---
 
@@ -91,10 +91,18 @@ Review rules to identify gaps, contradictions, or outdated content.
 All skills are in `skills/` directory:
 ```
 skills/
-├── add-convention/SKILL.md
-├── add-constraint/SKILL.md
-├── add-pattern/SKILL.md
-├── add-methodology/SKILL.md
+├── add-convention/
+│   ├── SKILL.md
+│   └── TEMPLATE.md
+├── add-constraint/
+│   ├── SKILL.md
+│   └── TEMPLATE.md
+├── add-pattern/
+│   ├── SKILL.md
+│   └── TEMPLATE.md
+├── add-methodology/
+│   ├── SKILL.md
+│   └── TEMPLATE.md
 ├── check-rules/SKILL.md
 ├── list-rules/SKILL.md
 └── review-rules/SKILL.md
