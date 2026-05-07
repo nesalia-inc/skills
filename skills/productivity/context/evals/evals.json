@@ -1,0 +1,35 @@
+{
+  "skill_name": "context-management",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add to context that our project uses PostgreSQL as the main database and Redis for caching",
+      "expected_output": "New file docs/architecture.md created (or existing enriched) with PostgreSQL and Redis information",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Remember that we follow conventional commits with amarty code agent and Co-Authored-By martyy-code",
+      "expected_output": "New or enriched .claude/rules/git-workflow.md with commit conventions",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "what context do we have about this project? show me what's documented",
+      "expected_output": "Summary showing which context files exist (CLAUDE.md, docs/, .claude/rules/) and what's missing",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Update the context - our startup command changed from 'npm start' to 'npm run dev'",
+      "expected_output": "docs/startup.md updated with correct startup command",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Document that we use a microservices architecture with 5 services: auth, api-gateway, users, orders, inventory",
+      "expected_output": "docs/architecture.md created or enriched with microservices architecture",
+      "files": []
+    }
+  ]
+}

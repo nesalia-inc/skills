@@ -19,12 +19,12 @@ All labels used across Marty repositories.
 
 ## Priority Labels
 
-| Label | Description |
-|-------|-------------|
-| `priority/p0` | Critical - urgent attention required |
-| `priority/p1` | High - important, address soon |
-| `priority/p2` | Medium - normal priority |
-| `priority/p3` | Low - nice to have |
+| Label | Description | SLA |
+|-------|-------------|-----|
+| `priority/p0` | Critical - production down, data loss, security breach | 24h resolution |
+| `priority/p1` | High - important feature broken, significant impact | Next sprint |
+| `priority/p2` | Medium - normal bugs/features, moderate impact | Backlog (prioritized) |
+| `priority/p3` | Low - nice to have, minor issues | Backlog |
 
 ## Status Labels
 
@@ -37,6 +37,8 @@ All labels used across Marty repositories.
 | `status/done` | Completed |
 | `status/wontfix` | Won't be addressed |
 | `status/duplicate` | Duplicate of another issue |
+| `status/backlog` | Triaged but not scheduled |
+| `status/icebox` | Triaged but deprioritized |
 
 ## RFC Labels
 
@@ -48,15 +50,17 @@ All labels used across Marty repositories.
 | `rfc/rejected` | RFC was rejected |
 | `rfc/deprecated` | RFC is no longer relevant |
 
-## Size Labels
+## Effort Labels
 
 | Label | Description |
 |-------|-------------|
-| `size/xs` | Extra small - trivial change |
-| `size/s` | Small - simple change |
-| `size/m` | Medium - moderate effort |
-| `size/l` | Large - significant effort |
-| `size/xl` | Extra large - major undertaking |
+| `effort/xs` | Extra small - trivial change |
+| `effort/s` | Small - simple change |
+| `effort/m` | Medium - moderate effort |
+| `effort/l` | Large - significant effort |
+| `effort/xl` | Extra large - major undertaking |
+
+**Note:** Rename from "Size" to "Effort" - size estimation at triage time is often premature.
 
 ## Help Labels
 
@@ -73,6 +77,7 @@ All labels used across Marty repositories.
 | `triage/needs-info` | Requires more information |
 | `triage/confirmed` | Issue confirmed |
 | `triage/reproducible` | Can be reproduced |
+| `triage/needs-investigation` | Cannot estimate effort without technical spike |
 
 ## Area Labels
 
@@ -92,9 +97,10 @@ All labels used across Marty repositories.
 ```
 Type:        bug | feature | enhancement | refactor | docs | question | chore | test | perf | ci
 Priority:    priority/p0 | priority/p1 | priority/p2 | priority/p3
-Status:      status/triaged | status/in-progress | status/blocked | status/in-review | status/done
+Status:      status/triaged | status/in-progress | status/blocked | status/in-review | status/done | status/backlog | status/icebox
 RFC:         rfc-needed | rfc/draft | rfc/approved | rfc/rejected
-Size:        size/xs | size/s | size/m | size/l | size/xl
+Effort:      effort/xs | effort/s | effort/m | effort/l | effort/xl
+Triage:      triage/needs-info | triage/confirmed | triage/reproducible | triage/needs-investigation
 Help:        help wanted | good first issue
 Area:        area/auth | area/api | area/frontend | area/backend | area/docs
 ```
